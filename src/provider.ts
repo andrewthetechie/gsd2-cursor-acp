@@ -12,6 +12,7 @@ import type { SessionUpdate } from "@agentclientprotocol/sdk";
 import type { JsonRpcNotification } from "./types.js";
 import { AcpSessionPool, type AcpSessionPoolOptions } from "./session-pool.js";
 import { AcpEventTranslator } from "./event-translator.js";
+import { CursorSessionError } from "./errors.js";
 
 // ---------------------------------------------------------------------------
 // Inline type definitions matching @gsd/pi-ai shapes exactly.
@@ -322,7 +323,10 @@ export const streamCursorAcp: StreamFunction = (
     } catch (err) {
       if (!isDone) {
         isDone = true;
-        const errMsg = err instanceof Error ? err.message : String(err);
+        const sessionErr = err instanceof CursorSessionError
+          ? err
+          : new CursorSessionError(err instanceof Error ? err.message : String(err), err);
+        const errMsg = `${sessionErr.name}: ${sessionErr.message}`;
         const errorMessage: AssistantMessage = {
           role: 'assistant' as const,
           content: [],

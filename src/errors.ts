@@ -40,3 +40,33 @@ export class JsonRpcError extends TransportError {
     this.name = "JsonRpcError";
   }
 }
+
+export class CursorCliNotFoundError extends TransportError {
+  constructor() {
+    super(
+      'cursor-agent not found. Install Cursor from https://cursor.com and ' +
+        'ensure cursor-agent is on your PATH, then run `cursor-agent login`.',
+    );
+    this.name = 'CursorCliNotFoundError';
+  }
+}
+
+export class CursorAuthError extends TransportError {
+  constructor(
+    message: string,
+    public readonly cause: unknown,
+  ) {
+    super(message);
+    this.name = 'CursorAuthError';
+  }
+}
+
+export class CursorSessionError extends TransportError {
+  constructor(
+    message: string,
+    public readonly cause?: unknown,
+  ) {
+    super(message);
+    this.name = 'CursorSessionError';
+  }
+}

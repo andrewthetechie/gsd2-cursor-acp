@@ -4,6 +4,7 @@ import { registerApiProvider } from './api-registry.js';
 import { cursorAcpProvider } from './provider.js';
 import { buildModel, type CursorAcpModel } from './model-metadata.js';
 import { DEFAULT_TRANSPORT_OPTIONS } from './types.js';
+import { CursorCliNotFoundError } from './errors.js';
 
 const execFileAsync = promisify(execFile);
 
@@ -95,6 +96,15 @@ export async function registerCursorAcpProvider(options?: {
   binaryPath?: string;
 }): Promise<void> {
   const binaryPath = options?.binaryPath ?? DEFAULT_TRANSPORT_OPTIONS.binaryPath;
+  try {
+    await execFileAsync(binaryPath, ['--version'], { timeout: 5_000 });
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+      throw new CursorCliNotFoundError();
+    }
+    const msg = err instanceof Error ? err.message : String(err);
+    throw new Error(`cursor-agent binary check failed: ${msg}`);
+  }
   const nativeIds = await discoverModelIds(binaryPath);
   _registeredModels = nativeIds.map(buildModel);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

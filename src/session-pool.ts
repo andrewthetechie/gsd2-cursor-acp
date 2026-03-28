@@ -4,6 +4,7 @@ import {
   PermissionHandler,
   type PermissionPolicy,
 } from "./permission-handler.js";
+import { CursorAuthError } from "./errors.js";
 
 export type { PermissionPolicy };
 
@@ -184,9 +185,10 @@ export class AcpSessionPool {
     } catch (error) {
       // D-07: Fail fast with clear message when not authenticated
       this.initPromise = null; // Allow retry after fixing auth
-      throw new Error(
+      throw new CursorAuthError(
         `Authentication failed. Set CURSOR_API_KEY or run \`cursor-agent login\`. ` +
           `Original error: ${error instanceof Error ? error.message : String(error)}`,
+        error,
       );
     }
 
