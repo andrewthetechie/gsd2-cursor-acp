@@ -21,7 +21,7 @@ export interface AcpSessionPoolOptions {
 }
 
 export class AcpSessionPool {
-  private readonly transport: AcpTransport;
+  readonly transport: AcpTransport;
   private readonly permissionHandler: PermissionHandler;
   private readonly maxSessions: number;
   private readonly sessionMode: 'agent' | 'plan' | 'ask';
