@@ -18,25 +18,8 @@ function createMockProcess(): ChildProcess & {
   _stdout: PassThrough;
   _stderr: PassThrough;
 } {
-  const proc = new EventEmitter() as ChildProcess & {
-    _stdin: PassThrough;
-    _stdout: PassThrough;
-    _stderr: PassThrough;
-    stdin: PassThrough;
-    stdout: PassThrough;
-    stderr: PassThrough;
-    pid: number;
-    killed: boolean;
-    kill: ReturnType<typeof vi.fn>;
-    exitCode: number | null;
-    signalCode: string | null;
-    connected: boolean;
-    disconnect: () => void;
-    ref: () => void;
-    unref: () => void;
-    channel: null;
-    stdio: [PassThrough, PassThrough, PassThrough, null, null];
-  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const proc = new EventEmitter() as any;
 
   const stdin = new PassThrough();
   const stdout = new PassThrough();
@@ -49,7 +32,7 @@ function createMockProcess(): ChildProcess & {
   proc.stdout = stdout;
   proc.stderr = stderr;
   proc.pid = 12345;
-  proc.killed = false;
+  Object.defineProperty(proc, "killed", { value: false, writable: true, configurable: true });
   proc.exitCode = null;
   proc.signalCode = null;
   proc.connected = false;
@@ -60,7 +43,7 @@ function createMockProcess(): ChildProcess & {
   proc.stdio = [stdin, stdout, stderr, null, null];
 
   proc.kill = vi.fn((_signal?: string) => {
-    proc.killed = true;
+    Object.defineProperty(proc, "killed", { value: true, writable: true });
     return true;
   }) as unknown as ChildProcess["kill"];
 
@@ -87,11 +70,25 @@ describe("AcpTransport", () => {
   });
 
   afterEach(async () => {
+    // Suppress unhandled rejection from pending request timeouts during cleanup
+    transport.removeAllListeners("error");
+    transport.on("error", () => {}); // swallow errors during cleanup
+
+    // Switch to real timers for cleanup
     vi.useRealTimers();
     mockSpawn.mockReset();
-    // Clean up transport if still running
+
+    // Clean up transport if still running - make kill emit exit
     try {
-      await transport.shutdown();
+      if (transport.isRunning()) {
+        const currentProc = mockProc;
+        currentProc.kill = vi.fn((_signal?: string) => {
+          Object.defineProperty(currentProc, "killed", { value: true, writable: true, configurable: true });
+          process.nextTick(() => currentProc.emit("exit", 0, null));
+          return true;
+        }) as unknown as ChildProcess["kill"];
+        await transport.shutdown();
+      }
     } catch {
       // Ignore shutdown errors in cleanup
     }
@@ -144,6 +141,9 @@ describe("AcpTransport", () => {
 
       const promise = transport.sendRequest("test/fail");
 
+      // Catch early to prevent unhandled rejection
+      const caught = promise.catch((err: unknown) => err);
+
       writeResponse(mockProc, {
         jsonrpc: "2.0",
         id: 1,
@@ -151,7 +151,9 @@ describe("AcpTransport", () => {
       });
       await vi.advanceTimersByTimeAsync(10);
 
-      await expect(promise).rejects.toThrow("Method not found");
+      const error = await caught;
+      expect(error).toBeInstanceOf(Error);
+      expect((error as Error).message).toBe("Method not found");
     });
 
     it("emits 'notification' event for messages with method but no id", async () => {
@@ -368,8 +370,10 @@ describe("AcpTransport", () => {
 
       const promise = transport.sendRequest("test/slow");
 
+      // Catch early to prevent unhandled rejection
+      const caught = promise.catch((err: unknown) => err);
+
       // Shutdown while request is pending
-      // Don't await, just start it
       mockProc.kill = vi.fn((_signal?: string) => {
         process.nextTick(() => mockProc.emit("exit", 0, null));
         return true;
@@ -378,7 +382,9 @@ describe("AcpTransport", () => {
       const shutdownPromise = transport.shutdown();
       await vi.advanceTimersByTimeAsync(100);
 
-      await expect(promise).rejects.toThrow(/shutting down/i);
+      const error = await caught;
+      expect(error).toBeInstanceOf(Error);
+      expect((error as Error).message).toMatch(/shutting down/i);
       await shutdownPromise;
     });
   });
@@ -430,13 +436,16 @@ describe("AcpTransport", () => {
 
       const promise = transport.sendRequest("test/slow-method");
 
+      // Catch the rejection to prevent unhandled rejection warning
+      const caught = promise.catch((err: unknown) => err);
+
       // Advance past the 5s request timeout
       await vi.advanceTimersByTimeAsync(5_100);
 
-      await expect(promise).rejects.toThrow(/timed out/i);
-      await expect(promise).rejects.toMatchObject({
-        name: "RequestTimeoutError",
-      });
+      const error = await caught;
+      expect(error).toBeInstanceOf(Error);
+      expect((error as Error).message).toMatch(/timed out/i);
+      expect((error as Error).name).toBe("RequestTimeoutError");
     });
 
     it("discards response with unmatched ID (no crash)", async () => {
