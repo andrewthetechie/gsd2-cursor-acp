@@ -16,12 +16,15 @@ export interface AcpSessionPoolOptions {
   permissionPolicy?: PermissionPolicy;
   /** Max cached sessions before LRU eviction. Default: 10. */
   maxSessions?: number;
+  /** Session mode for session/new requests. Default: 'agent' (required for tool + thinking notifications per D-14). */
+  sessionMode?: 'agent' | 'plan' | 'ask';
 }
 
 export class AcpSessionPool {
   private readonly transport: AcpTransport;
   private readonly permissionHandler: PermissionHandler;
   private readonly maxSessions: number;
+  private readonly sessionMode: 'agent' | 'plan' | 'ask';
   private initPromise: Promise<void> | null = null;
   private initialized = false;
   private readonly sessions = new Map<string, string>(); // cwd -> sessionId
@@ -46,6 +49,7 @@ export class AcpSessionPool {
       options.permissionPolicy ?? "auto-approve-all",
     );
     this.maxSessions = options.maxSessions ?? 10;
+    this.sessionMode = options.sessionMode ?? 'agent';
 
     // Wire permission handling per Pattern 4 (AUTH-02)
     this.transport.on("request", (request: JsonRpcServerRequest) => {
@@ -137,6 +141,7 @@ export class AcpSessionPool {
     const result = (await this.transport.sendRequest("session/new", {
       cwd,
       mcpServers: [],
+      mode: this.sessionMode,
     })) as { sessionId: string };
 
     this.sessions.set(cwd, result.sessionId);

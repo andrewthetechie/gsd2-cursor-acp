@@ -171,7 +171,7 @@ describe("AcpSessionPool", () => {
         (c: unknown[]) => c[0] === "session/new",
       );
       expect(sessionNewCall).toBeDefined();
-      expect(sessionNewCall![1]).toEqual({ cwd: "/project", mcpServers: [] });
+      expect(sessionNewCall![1]).toEqual({ cwd: "/project", mcpServers: [], mode: "agent" });
       expect(typeof sessionId).toBe("string");
       expect(sessionId.length).toBeGreaterThan(0);
     });
