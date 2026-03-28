@@ -65,7 +65,7 @@ describe("AcpSessionPool", () => {
       await pool.getOrCreateSession("/project");
 
       expect(mockTransport.start).toHaveBeenCalledOnce();
-      const calls = mockTransport.sendRequest.mock.calls.map((c: unknown[]) => c[0]);
+      const calls = mockTransport.sendRequest.mock.calls.map((c: unknown[]) => c[0] as string);
       expect(calls[0]).toBe("initialize");
       expect(calls[1]).toBe("authenticate");
     });
@@ -78,7 +78,7 @@ describe("AcpSessionPool", () => {
       // start() called only once
       expect(mockTransport.start).toHaveBeenCalledOnce();
       // initialize and authenticate called only once each
-      const calls = mockTransport.sendRequest.mock.calls.map((c: unknown[]) => c[0]);
+      const calls = mockTransport.sendRequest.mock.calls.map((c: unknown[]) => c[0] as string);
       const initCalls = calls.filter((m: string) => m === "initialize");
       const authCalls = calls.filter((m: string) => m === "authenticate");
       expect(initCalls).toHaveLength(1);
@@ -90,7 +90,7 @@ describe("AcpSessionPool", () => {
       await pool.getOrCreateSession("/project-a");
       await pool.getOrCreateSession("/project-b");
 
-      const calls = mockTransport.sendRequest.mock.calls.map((c: unknown[]) => c[0]);
+      const calls = mockTransport.sendRequest.mock.calls.map((c: unknown[]) => c[0] as string);
       const initCalls = calls.filter((m: string) => m === "initialize");
       expect(initCalls).toHaveLength(1);
     });
@@ -109,7 +109,7 @@ describe("AcpSessionPool", () => {
         (c: unknown[]) => c[0] === "initialize",
       );
       expect(initCall).toBeDefined();
-      expect(initCall[1]).toEqual({
+      expect(initCall![1]).toEqual({
         protocolVersion: 1,
         clientCapabilities: {
           fs: { readTextFile: false, writeTextFile: false },
@@ -127,7 +127,7 @@ describe("AcpSessionPool", () => {
         (c: unknown[]) => c[0] === "authenticate",
       );
       expect(authCall).toBeDefined();
-      expect(authCall[1]).toEqual({ methodId: "cursor_login" });
+      expect(authCall![1]).toEqual({ methodId: "cursor_login" });
     });
 
     it("throws with D-07 message when authenticate rejects", async () => {
@@ -171,7 +171,7 @@ describe("AcpSessionPool", () => {
         (c: unknown[]) => c[0] === "session/new",
       );
       expect(sessionNewCall).toBeDefined();
-      expect(sessionNewCall[1]).toEqual({ cwd: "/project", mcpServers: [] });
+      expect(sessionNewCall![1]).toEqual({ cwd: "/project", mcpServers: [] });
       expect(typeof sessionId).toBe("string");
       expect(sessionId.length).toBeGreaterThan(0);
     });
