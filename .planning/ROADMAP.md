@@ -73,10 +73,10 @@ Plans:
   1. Provider queries Cursor CLI for available models at startup and registers them dynamically
   2. Each discovered model has metadata including context window, capabilities, and cost information
   3. GSD-2 canonical model IDs and ThinkingLevel settings map correctly to Cursor model variants
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 04-01: ModelRegistry with dynamic discovery and canonical ID mapping
+- [ ] 04-01-PLAN.md — Async registerCursorAcpProvider with cursor-agent --list-models discovery, model-metadata static table, getCursorAcpModels export, and unit tests
 
 ### Phase 5: Hardening & Verification
 **Goal**: The provider handles all failure modes gracefully and is proven correct via tests and documentation
@@ -104,5 +104,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 1. ACP Transport | 0/2 | Planning complete | - |
 | 2. Session & Authentication | 2/2 | Complete   | 2026-03-28 |
 | 3. Provider & Streaming | 2/2 | Complete   | 2026-03-28 |
-| 4. Model Discovery & Registration | 0/1 | Not started | - |
+| 4. Model Discovery & Registration | 0/1 | Planning complete | - |
 | 5. Hardening & Verification | 0/2 | Not started | - |
