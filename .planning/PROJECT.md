@@ -38,10 +38,12 @@ GSD-2 subagents can seamlessly use Cursor as their coding backend — same inter
 - ✓ Provider implements `ApiProvider` interface (`stream()` and `streamSimple()` return `AssistantMessageEventStream` synchronously) — Phase 3 (PROV-01, PROV-02)
 - ✓ ACP streaming: `session/update` notifications translated to text/thinking/toolcall events; AbortSignal wired to `session/cancel` — Phase 3 (STRM-01, STRM-02, STRM-03, STRM-04)
 
-### Active
+### Validated
 
-- [ ] Dynamic model discovery: query Cursor CLI for available models at startup
-- [ ] Discovered models registered with proper metadata (context window, capabilities, cost)
+- ✓ Dynamic model discovery: `registerCursorAcpProvider()` spawns `cursor-agent --list-models`, parses output, and registers models with `cursor-acp/` prefix — Phase 4 (MODL-01, MODL-02)
+- ✓ Discovered models registered with proper metadata (context window, capabilities, cost) via static lookup table with safe defaults for unknown models — Phase 4 (MODL-03)
+
+### Active
 - [ ] Tool handling follows GSD-2's existing pattern (same as Anthropic/Google providers)
 - [ ] Streaming responses mapped to `AssistantMessageEventStream` events (text, thinking, toolcall)
 - [ ] Error handling for CLI not installed, auth failures, session errors
@@ -121,4 +123,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-28 after Phase 3 complete*
+*Last updated: 2026-03-28 after Phase 4 complete*
