@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-03-28T05:50:00.605Z"
+status: verifying
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-03-28T05:54:58.907Z"
 last_activity: 2026-03-28
 progress:
   total_phases: 5
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 6
-  completed_plans: 5
+  completed_plans: 6
   percent: 0
 ---
 
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 
 Phase: 03 (provider-streaming) — EXECUTING
 Plan: 2 of 2
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-03-28
 
 Progress: [░░░░░░░░░░] 0%
@@ -57,6 +57,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02 P01 | 10min | 2 tasks | 2 files |
 | Phase 02 P02 | 4min | 3 tasks | 3 files |
 | Phase 03 P01 | 3min | 2 tasks | 4 files |
+| Phase 03 P02 | 3min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -74,6 +75,8 @@ Recent decisions affecting current work:
 - [Phase 02]: initPromise mutex pattern for transport initialization; separate sessionCreating mutex per-cwd for session creation
 - [Phase 03]: Defined GSD-2 types inline in event-translator.ts because @gsd/pi-ai is a peer dep not installed; types match context/gsd-2 shapes exactly
 - [Phase 03]: sessionMode defaults to 'agent' in AcpSessionPool per D-15; session/new requests now include mode field
+- [Phase 03]: Inline AssistantMessageEventStream and GSD-2 types in provider.ts; @gsd/pi-ai peer dep not installed (same as Plan 01)
+- [Phase 03]: Created local src/api-registry.ts mirroring @gsd/pi-ai registry interface to enable register.ts and tests without peer dep
 
 ### Pending Todos
 
@@ -85,6 +88,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T05:50:00.602Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-03-28T05:54:58.905Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None

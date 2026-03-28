@@ -15,16 +15,16 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Provider
 
-- [ ] **PROV-01**: Provider implements `ApiProvider` interface with `stream()` and `streamSimple()` methods
-- [ ] **PROV-02**: Provider returns `AssistantMessageEventStream` synchronously, populates asynchronously
-- [ ] **PROV-03**: Provider registers as `"cursor-acp"` API type via `registerApiProvider()`
+- [x] **PROV-01**: Provider implements `ApiProvider` interface with `stream()` and `streamSimple()` methods
+- [x] **PROV-02**: Provider returns `AssistantMessageEventStream` synchronously, populates asynchronously
+- [x] **PROV-03**: Provider registers as `"cursor-acp"` API type via `registerApiProvider()`
 
 ### Streaming
 
 - [x] **STRM-01**: Provider maps ACP `session/update` notifications to `AssistantMessageEventStream` events (text_delta, text_end, done, error)
 - [x] **STRM-02**: Provider maps tool call updates to toolcall_start/toolcall_end events
 - [x] **STRM-03**: Provider extracts thinking/reasoning content to thinking_start/thinking_delta/thinking_end events
-- [ ] **STRM-04**: Provider supports cancellation via AbortSignal, sending `session/cancel` to ACP
+- [x] **STRM-04**: Provider supports cancellation via AbortSignal, sending `session/cancel` to ACP
 
 ### Models
 
@@ -88,13 +88,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | TRAN-01 | Phase 1 | Complete |
 | TRAN-02 | Phase 1 | Complete |
 | TRAN-03 | Phase 1 | Complete |
-| PROV-01 | Phase 3 | Pending |
-| PROV-02 | Phase 3 | Pending |
-| PROV-03 | Phase 3 | Pending |
+| PROV-01 | Phase 3 | Complete |
+| PROV-02 | Phase 3 | Complete |
+| PROV-03 | Phase 3 | Complete |
 | STRM-01 | Phase 3 | Complete |
 | STRM-02 | Phase 3 | Complete |
 | STRM-03 | Phase 3 | Complete |
-| STRM-04 | Phase 3 | Pending |
+| STRM-04 | Phase 3 | Complete |
 | MODL-01 | Phase 4 | Pending |
 | MODL-02 | Phase 4 | Pending |
 | MODL-03 | Phase 4 | Pending |

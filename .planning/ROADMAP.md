@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: ACP Transport** - JSON-RPC over stdio to cursor agent acp with message correlation
 - [x] **Phase 2: Session & Authentication** - ACP lifecycle management and permission handling (completed 2026-03-28)
-- [ ] **Phase 3: Provider & Streaming** - CursorAcpProvider implementing ApiProvider with event translation
+- [x] **Phase 3: Provider & Streaming** - CursorAcpProvider implementing ApiProvider with event translation (completed 2026-03-28)
 - [ ] **Phase 4: Model Discovery & Registration** - Dynamic model discovery and GSD-2 model registration
 - [ ] **Phase 5: Hardening & Verification** - Error handling, unit tests, integration tests, documentation
 
@@ -59,11 +59,11 @@ Plans:
   3. Tool call updates from Cursor are mapped to toolcall_start and toolcall_end events
   4. Thinking/reasoning content from the underlying model is extracted to thinking_start/thinking_delta/thinking_end events
   5. Cancellation via AbortSignal sends session/cancel to ACP and ends the stream cleanly
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 03-01-PLAN.md — AcpEventTranslator (ACP notification → GSD-2 event translation) + sessionMode on AcpSessionPool
-- [ ] 03-02-PLAN.md — CursorAcpProvider (stream/streamSimple), registration, and index exports
+- [x] 03-02-PLAN.md — CursorAcpProvider (stream/streamSimple), registration, and index exports
 
 ### Phase 4: Model Discovery & Registration
 **Goal**: Cursor models are dynamically discovered and registered in GSD-2's model system with proper metadata
@@ -103,6 +103,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. ACP Transport | 0/2 | Planning complete | - |
 | 2. Session & Authentication | 2/2 | Complete   | 2026-03-28 |
-| 3. Provider & Streaming | 1/2 | In Progress|  |
+| 3. Provider & Streaming | 2/2 | Complete   | 2026-03-28 |
 | 4. Model Discovery & Registration | 0/1 | Not started | - |
 | 5. Hardening & Verification | 0/2 | Not started | - |
