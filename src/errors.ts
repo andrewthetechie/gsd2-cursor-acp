@@ -41,6 +41,11 @@ export class JsonRpcError extends TransportError {
   }
 }
 
+/**
+ * Thrown by {@link registerCursorAcpProvider} when the cursor-agent binary is not found.
+ * Includes an actionable message with installation instructions.
+ * @throws When ENOENT is returned by the binary check (cursor-agent not on PATH).
+ */
 export class CursorCliNotFoundError extends TransportError {
   constructor() {
     super(
@@ -51,6 +56,12 @@ export class CursorCliNotFoundError extends TransportError {
   }
 }
 
+/**
+ * Thrown by {@link AcpSessionPool} when ACP authentication fails (expired token or missing login).
+ * The original error is preserved in `cause` for inspection.
+ * After this error, the session pool resets and allows a retry.
+ * @throws During the `authenticate` phase of ACP initialization.
+ */
 export class CursorAuthError extends TransportError {
   constructor(
     message: string,
@@ -61,6 +72,11 @@ export class CursorAuthError extends TransportError {
   }
 }
 
+/**
+ * Thrown when an ACP `session/new` or `session/prompt` request fails.
+ * Mapped to a GSD-2 `error` event by the provider's catch block.
+ * The error name ("CursorSessionError") appears in the `errorMessage` field of the error event.
+ */
 export class CursorSessionError extends TransportError {
   constructor(
     message: string,

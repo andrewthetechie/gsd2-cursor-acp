@@ -268,6 +268,19 @@ function buildPrompt(
 // Stream function
 // ---------------------------------------------------------------------------
 
+/**
+ * Stream a prompt through the Cursor ACP provider.
+ *
+ * Returns an {@link AssistantMessageEventStream} synchronously; the async ACP
+ * lifecycle (initialize -> authenticate -> session/new -> session/prompt) runs
+ * in the background and pushes events onto the returned stream.
+ *
+ * @param model - The Cursor ACP model to use (must have `api: 'cursor-acp'`).
+ * @param context - GSD-2 context containing messages and optional system prompt.
+ * @param options - Optional stream options (e.g., `signal` for AbortSignal).
+ * @returns An async-iterable event stream of {@link AssistantMessageEvent} values.
+ * @throws Never — errors are emitted as `{ type: 'error' }` events on the stream.
+ */
 export const streamCursorAcp: StreamFunction = (
   model,
   context,
@@ -365,6 +378,13 @@ export const streamSimpleCursorAcp: StreamSimpleFunction = (
   return streamCursorAcp(model, context, options);
 };
 
+/**
+ * GSD-2 `ApiProvider` implementation for the Cursor ACP backend.
+ *
+ * Register this provider via {@link registerCursorAcpProvider} rather than
+ * constructing it directly. After registration, it is available as the
+ * `'cursor-acp'` provider in GSD-2's provider registry.
+ */
 export const cursorAcpProvider = {
   api: 'cursor-acp' as const,
   stream: streamCursorAcp,

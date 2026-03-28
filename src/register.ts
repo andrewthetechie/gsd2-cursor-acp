@@ -81,16 +81,18 @@ export async function discoverModelIds(binaryPath: string): Promise<string[]> {
 /**
  * Register the Cursor ACP provider with GSD-2's provider registry.
  *
- * BREAKING CHANGE from Phase 3: This function is now async.
- * Callers MUST await this before using cursor-acp models.
+ * Performs an upfront binary check to verify cursor-agent is on PATH.
+ * Runs model discovery via `cursor-agent --list-models`.
+ * Must be awaited before using the `cursor-acp` provider.
  *
- * D-09: async, returns Promise<void>.
- * D-10: discovery runs eagerly — models are registered before the promise resolves.
- * D-11: no disk caching — discovery runs fresh on every call.
- *
+ * @param options - Optional configuration
+ * @param options.binaryPath - Path to the cursor-agent binary. Defaults to `'cursor-agent'` on PATH.
+ * @throws {CursorCliNotFoundError} When cursor-agent binary is not found on PATH.
+ * @throws {Error} When model discovery fails or returns no models.
  * @example
  * import { registerCursorAcpProvider } from '@gsd/pi-ai-cursor-acp';
  * await registerCursorAcpProvider();
+ * // Provider is now registered as 'cursor-acp'
  */
 export async function registerCursorAcpProvider(options?: {
   binaryPath?: string;
