@@ -10,7 +10,7 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Transport
 
 - [x] **TRAN-01**: ACP transport sends and receives JSON-RPC messages over stdio to `cursor agent acp` child process
-- [ ] **TRAN-02**: Transport manages long-lived child process (spawn once, reuse across requests)
+- [x] **TRAN-02**: Transport manages long-lived child process (spawn once, reuse across requests)
 - [x] **TRAN-03**: Transport correlates JSON-RPC requests/responses by message ID
 
 ### Provider
@@ -86,7 +86,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | TRAN-01 | Phase 1 | Complete |
-| TRAN-02 | Phase 1 | Pending |
+| TRAN-02 | Phase 1 | Complete |
 | TRAN-03 | Phase 1 | Complete |
 | PROV-01 | Phase 3 | Pending |
 | PROV-02 | Phase 3 | Pending |
