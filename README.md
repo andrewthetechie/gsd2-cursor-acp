@@ -10,15 +10,15 @@ Cursor ACP provider for GSD-2 — integrates Cursor as a first-class LLM provide
 
 ## Installation
 
-```bash
-npm install @gsd/pi-ai-cursor-acp
-```
-
-Or, if using a workspace:
+Install as a gsd2 extension directly from the git repository:
 
 ```bash
-npm install @gsd/pi-ai-cursor-acp --workspace=<your-package>
+gsd install github:OWNER/REPO
 ```
+
+Replace `OWNER/REPO` with the actual GitHub path (e.g. `my-org/gsd-cursor`).
+
+The extension registers itself automatically — no manual configuration needed.
 
 ## Configuration
 
@@ -29,20 +29,30 @@ npm install @gsd/pi-ai-cursor-acp --workspace=<your-package>
 
 ## Usage
 
-```typescript
-import { registerCursorAcpProvider } from '@gsd/pi-ai-cursor-acp';
+Once installed, the Cursor ACP provider is available in gsd2 automatically.
 
-// Register at startup — throws CursorCliNotFoundError if cursor-agent not on PATH
-await registerCursorAcpProvider();
+### 1. Verify the extension is loaded
 
-// Use via GSD-2 provider API
-const provider = getApiProvider('cursor-acp');
-const stream = provider.stream(context, model);
-for await (const event of stream) {
-  if (event.type === 'text_delta') process.stdout.write(event.delta);
-  if (event.type === 'done') break;
-}
+After installing, the provider auto-registers via the gsd2 Extension API. Cursor models will appear in gsd2's model list. You can verify with:
+
+```bash
+gsd /model
 ```
+
+Look for models prefixed with `cursor-acp/` (e.g. `cursor-acp/claude-3-5-sonnet`).
+
+### 2. Select a Cursor model
+
+Choose a Cursor model via the `/model` command in a gsd2 session, or set it in your gsd2 configuration:
+
+```yaml
+# ~/.gsd/agent/config.yaml (syntax depends on your gsd2 version)
+model: cursor-acp/claude-3-5-sonnet
+```
+
+### 3. Verify the integration
+
+Run gsd2 normally. On first use the extension spawns `cursor-agent` and establishes an ACP session. Check gsd2 logs for a `cursor-acp` provider line at startup.
 
 ## Error Handling
 
