@@ -1,0 +1,33 @@
+{
+  "name": "@gsd/pi-ai-cursor-acp",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@agentclientprotocol/sdk": "^0.17.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0",
+    "tsup": "^8.0.0",
+    "@types/node": "^22.0.0"
+  },
+  "peerDependencies": {
+    "@gsd/pi-ai": "*"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
