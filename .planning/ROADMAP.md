@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Session & Authentication** - ACP lifecycle management and permission handling (completed 2026-03-28)
 - [x] **Phase 3: Provider & Streaming** - CursorAcpProvider implementing ApiProvider with event translation (completed 2026-03-28)
 - [x] **Phase 4: Model Discovery & Registration** - Dynamic model discovery and GSD-2 model registration (completed 2026-03-28)
-- [ ] **Phase 5: Hardening & Verification** - Error handling, unit tests, integration tests, documentation
+- [x] **Phase 5: Hardening & Verification** - Error handling, unit tests, integration tests, documentation (completed 2026-03-28)
 
 ## Phase Details
 
@@ -88,11 +88,11 @@ Plans:
   3. Session creation and prompt errors are mapped to GSD-2 error events with meaningful messages
   4. Unit tests cover EventTranslator, AcpTransport message handling, and AcpSessionPool lifecycle logic
   5. End-to-end tests prove the full ACP integration works with a real Cursor CLI
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 05-01-PLAN.md — Typed error classes (CursorCliNotFoundError, CursorAuthError, CursorSessionError) + call-site wiring + unit tests
-- [ ] 05-02-PLAN.md — Mock ACP subprocess fixture, integration test suite (4 paths), README, TESTING.md, TSDoc
+- [x] 05-02-PLAN.md — Mock ACP subprocess fixture, integration test suite (4 paths), README, TESTING.md, TSDoc
 
 ## Progress
 
@@ -105,4 +105,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 2. Session & Authentication | 2/2 | Complete   | 2026-03-28 |
 | 3. Provider & Streaming | 2/2 | Complete   | 2026-03-28 |
 | 4. Model Discovery & Registration | 1/1 | Complete   | 2026-03-28 |
-| 5. Hardening & Verification | 1/2 | In Progress|  |
+| 5. Hardening & Verification | 2/2 | Complete   | 2026-03-28 |

@@ -47,8 +47,8 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Testing
 
 - [x] **TEST-01**: Unit tests cover event translator, transport message handling, and session pool logic
-- [ ] **TEST-02**: End-to-end tests prove ACP integration works with real Cursor CLI
-- [ ] **TEST-03**: Setup, configuration, and usage documentation provided
+- [x] **TEST-02**: End-to-end tests prove ACP integration works with real Cursor CLI
+- [x] **TEST-03**: Setup, configuration, and usage documentation provided
 
 ## Future Requirements
 
@@ -105,8 +105,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ERRH-02 | Phase 5 | Complete |
 | ERRH-03 | Phase 5 | Complete |
 | TEST-01 | Phase 5 | Complete |
-| TEST-02 | Phase 5 | Pending |
-| TEST-03 | Phase 5 | Pending |
+| TEST-02 | Phase 5 | Complete |
+| TEST-03 | Phase 5 | Complete |
 
 **Coverage:**
 - v1.0 requirements: 22 total
