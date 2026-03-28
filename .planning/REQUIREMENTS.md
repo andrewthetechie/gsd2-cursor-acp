@@ -35,8 +35,8 @@ Requirements for initial release. Each maps to roadmap phases.
 ### Auth
 
 - [ ] **AUTH-01**: Provider authenticates via `CURSOR_API_KEY` env var or existing Cursor CLI login
-- [ ] **AUTH-02**: Provider auto-responds to `session/request_permission` with configurable policy (default: allow-once)
-- [ ] **AUTH-03**: Permission policy is configurable (auto-approve-all, approve-reads-reject-writes, interactive)
+- [x] **AUTH-02**: Provider auto-responds to `session/request_permission` with configurable policy (default: allow-once)
+- [x] **AUTH-03**: Permission policy is configurable (auto-approve-all, approve-reads-reject-writes, interactive)
 
 ### Errors
 
@@ -99,8 +99,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MODL-02 | Phase 4 | Pending |
 | MODL-03 | Phase 4 | Pending |
 | AUTH-01 | Phase 2 | Pending |
-| AUTH-02 | Phase 2 | Pending |
-| AUTH-03 | Phase 2 | Pending |
+| AUTH-02 | Phase 2 | Complete |
+| AUTH-03 | Phase 2 | Complete |
 | ERRH-01 | Phase 5 | Pending |
 | ERRH-02 | Phase 5 | Pending |
 | ERRH-03 | Phase 5 | Pending |
