@@ -4,6 +4,21 @@
 
 An LLM provider adapter that integrates Cursor as a first-class provider in GSD-2's `@gsd/pi-ai` package, using the Agent Client Protocol (ACP) over stdio. This lets GSD-2 users run subagent tasks through Cursor's coding agent, leveraging whatever models are available on their Cursor subscription (Claude, GPT, Gemini, Grok, etc.).
 
+## Current Milestone: v1.0 Cursor ACP Provider
+
+**Goal:** Integrate Cursor as a first-class GSD-2 provider via the Agent Client Protocol (ACP) over stdio.
+
+**Target features:**
+- ACP transport layer (JSON-RPC over stdio to `cursor agent acp`)
+- ACP lifecycle management (initialize → authenticate → session/new → session/prompt)
+- Dynamic model discovery from Cursor CLI
+- Provider registration in `@gsd/pi-ai` implementing `ApiProvider` interface
+- Streaming response mapping to `AssistantMessageEventStream`
+- Permission handling for `session/request_permission`
+- Tool handling following existing GSD-2 patterns
+- Error handling for CLI/auth/session failures
+- Test suite and documentation
+
 ## Core Value
 
 GSD-2 subagents can seamlessly use Cursor as their coding backend — same interface as Anthropic or Google providers, but powered by Cursor's agent with full ACP protocol support.
@@ -104,4 +119,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-27 after initialization*
+*Last updated: 2026-03-27 after milestone v1.0 started*
