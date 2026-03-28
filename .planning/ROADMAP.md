@@ -106,3 +106,13 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 3. Provider & Streaming | 2/2 | Complete   | 2026-03-28 |
 | 4. Model Discovery & Registration | 1/1 | Complete   | 2026-03-28 |
 | 5. Hardening & Verification | 2/2 | Complete   | 2026-03-28 |
+
+### Phase 6: Fix README for standalone distribution — remove @gsd npm install directions, add git-based install instructions, replace code-centric usage section with gsd2 configuration guide
+
+**Goal:** README.md accurately documents git-based installation and gsd2 provider configuration so developers can adopt the package without a published npm org
+**Requirements**: README-01
+**Depends on:** Phase 5
+**Plans:** 1 plan
+
+Plans:
+- [ ] 06-01-PLAN.md — Rewrite Installation section (git URL) and Usage section (gsd2 configuration steps)
