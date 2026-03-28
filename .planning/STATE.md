@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 05-02-PLAN.md
-last_updated: "2026-03-28T16:54:29.624Z"
+stopped_at: Completed 06-01-PLAN.md
+last_updated: "2026-03-28T18:18:03.485Z"
 last_activity: 2026-03-28
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 9
-  completed_plans: 9
+  total_phases: 6
+  completed_phases: 6
+  total_plans: 10
+  completed_plans: 10
   percent: 0
 ---
 
@@ -21,12 +21,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-27)
 
 **Core value:** GSD-2 subagents can seamlessly use Cursor as their coding backend -- same interface as Anthropic or Google providers, but powered by Cursor's agent with full ACP protocol support.
-**Current focus:** Phase 05 — hardening-verification
+**Current focus:** Phase 06 — fix-readme-for-standalone-distribution
 
 ## Current Position
 
-Phase: 05
-Plan: Not started
+Phase: 06 (fix-readme-for-standalone-distribution) — EXECUTING
+Plan: 1 of 1
 Status: Phase complete — ready for verification
 Last activity: 2026-03-28
 
@@ -61,6 +61,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 04 P01 | 5min | 2 tasks | 4 files |
 | Phase 05 P01 | 3min | 2 tasks | 7 files |
 | Phase 05 P02 | 15min | 2 tasks | 7 files |
+| Phase 06 P01 | 1min | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,11 @@ Recent decisions affecting current work:
 - [Phase 05]: Binary check uses --version with 5s timeout before --list-models; ENOENT throws CursorCliNotFoundError
 - [Phase 05]: Mock server uses sessionUpdate: 'agent_message_chunk' (not type: 'text') to match ACP SDK SessionUpdate shape consumed by AcpEventTranslator.handleUpdate()
 - [Phase 05]: Integration tests inject pool via _setPoolForTest() since streamCursorAcp uses a module-level singleton; reset with _setPoolForTest(null) in afterEach
+- [Phase 06]: Preserved Error Handling TypeScript examples as API reference, not user setup instructions
+
+### Roadmap Evolution
+
+- Phase 06 added: Fix README for standalone distribution — remove @gsd npm install directions, add git-based install instructions, replace code-centric usage section with gsd2 configuration guide
 
 ### Pending Todos
 
@@ -97,6 +103,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T16:46:01.451Z
-Stopped at: Completed 05-02-PLAN.md
+Last session: 2026-03-28T18:18:03.482Z
+Stopped at: Completed 06-01-PLAN.md
 Resume file: None

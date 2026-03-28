@@ -115,4 +115,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 **Plans:** 1 plan
 
 Plans:
-- [ ] 06-01-PLAN.md — Rewrite Installation section (git URL) and Usage section (gsd2 configuration steps)
+- [x] 06-01-PLAN.md — Rewrite Installation section (git URL) and Usage section (gsd2 configuration steps)
