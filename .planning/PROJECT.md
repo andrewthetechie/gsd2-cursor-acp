@@ -43,12 +43,11 @@ GSD-2 subagents can seamlessly use Cursor as their coding backend — same inter
 - ✓ Dynamic model discovery: `registerCursorAcpProvider()` spawns `cursor-agent --list-models`, parses output, and registers models with `cursor-acp/` prefix — Phase 4 (MODL-01, MODL-02)
 - ✓ Discovered models registered with proper metadata (context window, capabilities, cost) via static lookup table with safe defaults for unknown models — Phase 4 (MODL-03)
 
-### Active
-- [ ] Tool handling follows GSD-2's existing pattern (same as Anthropic/Google providers)
-- [ ] Streaming responses mapped to `AssistantMessageEventStream` events (text, thinking, toolcall)
-- [ ] Error handling for CLI not installed, auth failures, session errors
-- [ ] Test suite proving ACP integration works end-to-end
-- [ ] Documentation for setup, configuration, and usage
+### Validated
+
+- ✓ Error handling for CLI not installed, auth failures, session errors via typed error classes (`CursorCliNotFoundError`, `CursorAuthError`, `CursorSessionError`) — Phase 5 (ERRH-01, ERRH-02, ERRH-03)
+- ✓ Integration test suite proving full-stack ACP wiring without requiring Cursor installed (mock ACP subprocess, 4-path test coverage) — Phase 5 (TEST-01, TEST-02)
+- ✓ Documentation: README.md, TESTING.md, TSDoc on all public exports — Phase 5 (TEST-03)
 
 ### Out of Scope
 
@@ -123,4 +122,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-28 after Phase 4 complete*
+*Last updated: 2026-03-28 after Phase 5 complete — v1.0 milestone complete*
