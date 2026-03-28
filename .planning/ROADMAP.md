@@ -31,7 +31,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Project scaffolding, transport types, and error classes
+- [x] 01-01-PLAN.md — Project scaffolding, transport types, and error classes
 - [ ] 01-02-PLAN.md — AcpTransport implementation and unit tests
 
 ### Phase 2: Session & Authentication
