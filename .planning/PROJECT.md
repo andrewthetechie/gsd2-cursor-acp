@@ -48,6 +48,7 @@ GSD-2 subagents can seamlessly use Cursor as their coding backend — same inter
 - ✓ Error handling for CLI not installed, auth failures, session errors via typed error classes (`CursorCliNotFoundError`, `CursorAuthError`, `CursorSessionError`) — Phase 5 (ERRH-01, ERRH-02, ERRH-03)
 - ✓ Integration test suite proving full-stack ACP wiring without requiring Cursor installed (mock ACP subprocess, 4-path test coverage) — Phase 5 (TEST-01, TEST-02)
 - ✓ Documentation: README.md, TESTING.md, TSDoc on all public exports — Phase 5 (TEST-03)
+- ✓ README updated for standalone distribution: gsd2 extension install (`gsd install github:OWNER/REPO`), auto-registration docs, `/model` selection guide — Phase 6
 
 ### Out of Scope
 
@@ -107,6 +108,8 @@ GSD-2 subagents can seamlessly use Cursor as their coding backend — same inter
 ## Evolution
 
 This document evolves at phase transitions and milestone boundaries.
+
+Last updated: 2026-03-28 (Phase 06 complete)
 
 **After each phase transition** (via `/gsd:transition`):
 1. Requirements invalidated? -> Move to Out of Scope with reason
