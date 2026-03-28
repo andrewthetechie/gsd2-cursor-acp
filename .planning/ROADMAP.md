@@ -43,10 +43,11 @@ Plans:
   2. AcpSessionPool creates new sessions via session/new and reuses them for subsequent prompts
   3. Provider auto-responds to session/request_permission requests with configurable policy (default: allow-once)
   4. Permission policy is configurable between auto-approve-all, approve-reads-reject-writes, and interactive modes
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 02-01: AcpSessionPool, authentication, and PermissionHandler
+- [ ] 02-01-PLAN.md — PermissionHandler with configurable policy modes and tests
+- [ ] 02-02-PLAN.md — AcpSessionPool with lazy init, session reuse, and permission wiring
 
 ### Phase 3: Provider & Streaming
 **Goal**: GSD-2 consumers can call stream() on the Cursor ACP provider and receive a properly-typed AssistantMessageEventStream
@@ -101,7 +102,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. ACP Transport | 0/2 | Planning complete | - |
-| 2. Session & Authentication | 0/1 | Not started | - |
+| 2. Session & Authentication | 0/2 | Planning complete | - |
 | 3. Provider & Streaming | 0/2 | Not started | - |
 | 4. Model Discovery & Registration | 0/1 | Not started | - |
 | 5. Hardening & Verification | 0/2 | Not started | - |
