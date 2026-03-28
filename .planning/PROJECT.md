@@ -27,13 +27,12 @@ GSD-2 subagents can seamlessly use Cursor as their coding backend — same inter
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ ACP transport layer: JSON-RPC over stdio to `cursor agent acp` — Phase 1
 
 ### Active
 
 - [ ] Cursor appears as a provider in GSD-2's provider registry (`@gsd/pi-ai`)
 - [ ] Provider implements `ApiProvider` interface (`stream()` and `streamSimple()`)
-- [ ] ACP transport layer: JSON-RPC over stdio to `cursor agent acp`
 - [ ] ACP lifecycle: `initialize` -> `authenticate` -> `session/new` -> `session/prompt`
 - [ ] Dynamic model discovery: query Cursor CLI for available models at startup
 - [ ] Discovered models registered with proper metadata (context window, capabilities, cost)
@@ -119,4 +118,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-27 after milestone v1.0 started*
+*Last updated: 2026-03-28 after Phase 1 complete*
