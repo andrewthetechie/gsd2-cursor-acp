@@ -28,10 +28,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. AcpTransport can spawn `cursor agent acp` as a child process and send/receive newline-delimited JSON-RPC messages over stdio
   2. Transport reuses a single long-lived child process across multiple requests (no re-spawn per call)
   3. Outgoing requests and incoming responses are correctly correlated by message ID, and notifications are routed separately
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 01-01: AcpTransport and JSON-RPC types
+- [ ] 01-01-PLAN.md — Project scaffolding, transport types, and error classes
+- [ ] 01-02-PLAN.md — AcpTransport implementation and unit tests
 
 ### Phase 2: Session & Authentication
 **Goal**: Users can authenticate with Cursor and the provider can manage ACP session lifecycle and permissions
@@ -99,7 +100,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. ACP Transport | 0/1 | Not started | - |
+| 1. ACP Transport | 0/2 | Planning complete | - |
 | 2. Session & Authentication | 0/1 | Not started | - |
 | 3. Provider & Streaming | 0/2 | Not started | - |
 | 4. Model Discovery & Registration | 0/1 | Not started | - |
