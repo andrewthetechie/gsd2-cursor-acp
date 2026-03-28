@@ -6,6 +6,7 @@ import {
   parseModelIds,
   discoverModelIds,
 } from './register.js';
+import { CursorCliNotFoundError } from './errors.js';
 
 // Mock node:child_process so tests never spawn real cursor-agent.
 // Pitfall 3 from RESEARCH.md: cursor-agent requires unlocked macOS keychain.
@@ -255,5 +256,52 @@ describe('getCursorAcpModels', () => {
     const customFn = (execFile as any)[PROMISIFY_CUSTOM] as ReturnType<typeof vi.fn>;
     const [bin] = customFn.mock.calls[0] as any[];
     expect(bin).toBe('/custom/cursor-agent');
+  });
+});
+
+describe('registerCursorAcpProvider binary check (ERRH-01)', () => {
+  beforeEach(async () => {
+    vi.clearAllMocks();
+    clearApiProviders();
+  });
+
+  it('throws CursorCliNotFoundError when binary is not found (ENOENT)', async () => {
+    const enoentErr = Object.assign(new Error('spawn cursor-agent ENOENT'), { code: 'ENOENT' });
+    await setupMockExecFile(MOCK_STDOUT, enoentErr);
+    await expect(registerCursorAcpProvider()).rejects.toBeInstanceOf(CursorCliNotFoundError);
+  });
+
+  it('CursorCliNotFoundError message contains cursor-agent not found', async () => {
+    const enoentErr = Object.assign(new Error('spawn cursor-agent ENOENT'), { code: 'ENOENT' });
+    await setupMockExecFile(MOCK_STDOUT, enoentErr);
+    const err = await registerCursorAcpProvider().catch((e) => e);
+    expect(err.message).toContain('cursor-agent not found');
+  });
+
+  it('throws generic Error when binary fails for non-ENOENT reason', async () => {
+    const permErr = Object.assign(new Error('Permission denied'), { code: 'EACCES' });
+    await setupMockExecFile(MOCK_STDOUT, permErr);
+    await expect(registerCursorAcpProvider()).rejects.toThrow('binary check failed');
+  });
+
+  it('non-ENOENT error does not throw CursorCliNotFoundError', async () => {
+    const permErr = Object.assign(new Error('Permission denied'), { code: 'EACCES' });
+    await setupMockExecFile(MOCK_STDOUT, permErr);
+    const err = await registerCursorAcpProvider().catch((e) => e);
+    expect(err).not.toBeInstanceOf(CursorCliNotFoundError);
+  });
+
+  it('calls --version check before --list-models on success', async () => {
+    await setupMockExecFile();
+    await registerCursorAcpProvider();
+    const PROMISIFY_CUSTOM = Symbol.for('nodejs.util.promisify.custom');
+    const { execFile } = await import('node:child_process');
+    const customFn = (execFile as any)[PROMISIFY_CUSTOM] as ReturnType<typeof vi.fn>;
+    const calls = customFn.mock.calls as any[][];
+    const argsList = calls.map((c) => c[1] as string[]);
+    const versionIdx = argsList.findIndex((a) => a.includes('--version'));
+    const listModelsIdx = argsList.findIndex((a) => a.includes('--list-models'));
+    expect(versionIdx).toBeGreaterThanOrEqual(0);
+    expect(listModelsIdx).toBeGreaterThan(versionIdx);
   });
 });

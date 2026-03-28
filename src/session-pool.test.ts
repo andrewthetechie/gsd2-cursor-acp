@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { EventEmitter } from "node:events";
 import type { AcpSessionPool } from "./session-pool.js";
+import { CursorAuthError } from "./errors.js";
 
 // Create mock transport factory
 function createMockTransport() {
@@ -366,6 +367,55 @@ describe("AcpSessionPool", () => {
         (c: unknown[]) => c[0] === "initialize",
       );
       expect(initCalls).toHaveLength(2);
+    });
+  });
+
+  // ===========================================================================
+  // CursorAuthError behavior (ERRH-02)
+  // ===========================================================================
+
+  describe("CursorAuthError behavior", () => {
+    it("throws CursorAuthError on authenticate failure", async () => {
+      mockTransport.sendRequest = vi.fn().mockImplementation((method: string) => {
+        if (method === "initialize") return Promise.resolve({ protocolVersion: 1 });
+        if (method === "authenticate") return Promise.reject(new Error("invalid token"));
+        return Promise.resolve({});
+      });
+      const pool = new AcpSessionPoolClass({ transport: mockTransport as any });
+      await expect(pool.getOrCreateSession("/")).rejects.toBeInstanceOf(CursorAuthError);
+    });
+
+    it("CursorAuthError preserves original cause", async () => {
+      const authErr = new Error("invalid token");
+      mockTransport.sendRequest = vi.fn().mockImplementation((method: string) => {
+        if (method === "initialize") return Promise.resolve({ protocolVersion: 1 });
+        if (method === "authenticate") return Promise.reject(authErr);
+        return Promise.resolve({});
+      });
+      const pool = new AcpSessionPoolClass({ transport: mockTransport as any });
+      try {
+        await pool.getOrCreateSession("/");
+        expect.fail("expected to throw");
+      } catch (err) {
+        expect(err).toBeInstanceOf(CursorAuthError);
+        expect((err as CursorAuthError).cause).toBe(authErr);
+      }
+    });
+
+    it("allows retry after CursorAuthError (initPromise reset to null)", async () => {
+      let callCount = 0;
+      mockTransport.sendRequest = vi.fn().mockImplementation((method: string) => {
+        if (method === "initialize") return Promise.resolve({ protocolVersion: 1 });
+        if (method === "authenticate") {
+          callCount++;
+          return Promise.reject(new Error("auth fail"));
+        }
+        return Promise.resolve({});
+      });
+      const pool = new AcpSessionPoolClass({ transport: mockTransport as any });
+      await pool.getOrCreateSession("/").catch(() => {});
+      await pool.getOrCreateSession("/").catch(() => {});
+      expect(callCount).toBe(2); // authenticate was attempted twice
     });
   });
 });

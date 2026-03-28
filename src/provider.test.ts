@@ -7,6 +7,7 @@ import {
   AssistantMessageEventStream,
   _setPoolForTest,
 } from "./provider.js";
+import { CursorSessionError } from "./errors.js";
 
 // ---------------------------------------------------------------------------
 // Mock transport factory (same pattern as session-pool.test.ts)
@@ -232,6 +233,54 @@ describe("streamCursorAcp", () => {
     // Give finally block time to execute
     await new Promise<void>((resolve) => setTimeout(resolve, 5));
     expect(removedListeners).toContain("notification");
+  });
+
+  // ===========================================================================
+  // CursorSessionError in catch block (ERRH-03)
+  // ===========================================================================
+
+  it("error event errorMessage contains CursorSessionError name when plain Error is thrown", async () => {
+    const errorTransport = createMockTransport();
+    errorTransport.sendRequest = vi.fn().mockImplementation((method: string) => {
+      if (method === "initialize") return Promise.resolve({ protocolVersion: 1 });
+      if (method === "authenticate") return Promise.resolve({});
+      if (method === "session/new") return Promise.resolve({ sessionId: "err-session-1" });
+      if (method === "session/prompt") return Promise.reject(new Error("boom"));
+      return Promise.resolve({});
+    });
+    const errorPool = new AcpSessionPool({ transport: errorTransport as unknown as import("./transport.js").AcpTransport });
+    _setPoolForTest(errorPool);
+
+    const stream = streamCursorAcp(mockModel, mockContext, undefined);
+    const events: unknown[] = [];
+    for await (const ev of stream) {
+      events.push(ev);
+    }
+    const errEvent = events.find((e) => (e as { type: string }).type === "error") as { error: { errorMessage: string } } | undefined;
+    expect(errEvent).toBeDefined();
+    expect(errEvent!.error.errorMessage).toContain("CursorSessionError: boom");
+  });
+
+  it("preserves CursorSessionError name when already typed", async () => {
+    const errorTransport = createMockTransport();
+    errorTransport.sendRequest = vi.fn().mockImplementation((method: string) => {
+      if (method === "initialize") return Promise.resolve({ protocolVersion: 1 });
+      if (method === "authenticate") return Promise.resolve({});
+      if (method === "session/new") return Promise.resolve({ sessionId: "err-session-2" });
+      if (method === "session/prompt") return Promise.reject(new CursorSessionError("already typed", new Error("inner")));
+      return Promise.resolve({});
+    });
+    const errorPool = new AcpSessionPool({ transport: errorTransport as unknown as import("./transport.js").AcpTransport });
+    _setPoolForTest(errorPool);
+
+    const stream = streamCursorAcp(mockModel, mockContext, undefined);
+    const events: unknown[] = [];
+    for await (const ev of stream) {
+      events.push(ev);
+    }
+    const errEvent = events.find((e) => (e as { type: string }).type === "error") as { error: { errorMessage: string } } | undefined;
+    expect(errEvent).toBeDefined();
+    expect(errEvent!.error.errorMessage).toBe("CursorSessionError: already typed");
   });
 
   it("only processes notifications from the current sessionId (Pitfall 6 filter)", async () => {
