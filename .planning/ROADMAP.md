@@ -59,10 +59,10 @@ Plans:
   3. Tool call updates from Cursor are mapped to toolcall_start and toolcall_end events
   4. Thinking/reasoning content from the underlying model is extracted to thinking_start/thinking_delta/thinking_end events
   5. Cancellation via AbortSignal sends session/cancel to ACP and ends the stream cleanly
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
-- [ ] 03-01-PLAN.md — AcpEventTranslator (ACP notification → GSD-2 event translation) + sessionMode on AcpSessionPool
+- [x] 03-01-PLAN.md — AcpEventTranslator (ACP notification → GSD-2 event translation) + sessionMode on AcpSessionPool
 - [ ] 03-02-PLAN.md — CursorAcpProvider (stream/streamSimple), registration, and index exports
 
 ### Phase 4: Model Discovery & Registration
@@ -103,6 +103,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. ACP Transport | 0/2 | Planning complete | - |
 | 2. Session & Authentication | 2/2 | Complete   | 2026-03-28 |
-| 3. Provider & Streaming | 0/2 | Planning complete | - |
+| 3. Provider & Streaming | 1/2 | In Progress|  |
 | 4. Model Discovery & Registration | 0/1 | Not started | - |
 | 5. Hardening & Verification | 0/2 | Not started | - |

@@ -21,9 +21,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Streaming
 
-- [ ] **STRM-01**: Provider maps ACP `session/update` notifications to `AssistantMessageEventStream` events (text_delta, text_end, done, error)
-- [ ] **STRM-02**: Provider maps tool call updates to toolcall_start/toolcall_end events
-- [ ] **STRM-03**: Provider extracts thinking/reasoning content to thinking_start/thinking_delta/thinking_end events
+- [x] **STRM-01**: Provider maps ACP `session/update` notifications to `AssistantMessageEventStream` events (text_delta, text_end, done, error)
+- [x] **STRM-02**: Provider maps tool call updates to toolcall_start/toolcall_end events
+- [x] **STRM-03**: Provider extracts thinking/reasoning content to thinking_start/thinking_delta/thinking_end events
 - [ ] **STRM-04**: Provider supports cancellation via AbortSignal, sending `session/cancel` to ACP
 
 ### Models
@@ -91,9 +91,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PROV-01 | Phase 3 | Pending |
 | PROV-02 | Phase 3 | Pending |
 | PROV-03 | Phase 3 | Pending |
-| STRM-01 | Phase 3 | Pending |
-| STRM-02 | Phase 3 | Pending |
-| STRM-03 | Phase 3 | Pending |
+| STRM-01 | Phase 3 | Complete |
+| STRM-02 | Phase 3 | Complete |
+| STRM-03 | Phase 3 | Complete |
 | STRM-04 | Phase 3 | Pending |
 | MODL-01 | Phase 4 | Pending |
 | MODL-02 | Phase 4 | Pending |
