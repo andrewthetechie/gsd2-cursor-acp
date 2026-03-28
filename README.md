@@ -13,10 +13,8 @@ Cursor ACP provider for GSD-2 — integrates Cursor as a first-class LLM provide
 Install as a gsd2 extension directly from the git repository:
 
 ```bash
-gsd install github:OWNER/REPO
+gsd install https://github.com/andrewthetechie/gsd2-cursor-acp
 ```
-
-Replace `OWNER/REPO` with the actual GitHub path (e.g. `my-org/gsd-cursor`).
 
 The extension registers itself automatically — no manual configuration needed.
 

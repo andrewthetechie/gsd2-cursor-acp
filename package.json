@@ -24,9 +24,6 @@
     "tsup": "^8.0.0",
     "@types/node": "^22.0.0"
   },
-  "peerDependencies": {
-    "@gsd/pi-ai": "*"
-  },
   "engines": {
     "node": ">=22.0.0"
   }
