@@ -40,13 +40,13 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Errors
 
-- [ ] **ERRH-01**: Provider detects and reports when Cursor CLI is not installed
-- [ ] **ERRH-02**: Provider handles expired/missing authentication with clear error messages
-- [ ] **ERRH-03**: Provider handles session creation and prompt errors, mapping to GSD-2 error events
+- [x] **ERRH-01**: Provider detects and reports when Cursor CLI is not installed
+- [x] **ERRH-02**: Provider handles expired/missing authentication with clear error messages
+- [x] **ERRH-03**: Provider handles session creation and prompt errors, mapping to GSD-2 error events
 
 ### Testing
 
-- [ ] **TEST-01**: Unit tests cover event translator, transport message handling, and session pool logic
+- [x] **TEST-01**: Unit tests cover event translator, transport message handling, and session pool logic
 - [ ] **TEST-02**: End-to-end tests prove ACP integration works with real Cursor CLI
 - [ ] **TEST-03**: Setup, configuration, and usage documentation provided
 
@@ -101,10 +101,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AUTH-01 | Phase 2 | Complete |
 | AUTH-02 | Phase 2 | Complete |
 | AUTH-03 | Phase 2 | Complete |
-| ERRH-01 | Phase 5 | Pending |
-| ERRH-02 | Phase 5 | Pending |
-| ERRH-03 | Phase 5 | Pending |
-| TEST-01 | Phase 5 | Pending |
+| ERRH-01 | Phase 5 | Complete |
+| ERRH-02 | Phase 5 | Complete |
+| ERRH-03 | Phase 5 | Complete |
+| TEST-01 | Phase 5 | Complete |
 | TEST-02 | Phase 5 | Pending |
 | TEST-03 | Phase 5 | Pending |
 
