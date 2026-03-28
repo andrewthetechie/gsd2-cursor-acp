@@ -28,19 +28,19 @@ GSD-2 subagents can seamlessly use Cursor as their coding backend — same inter
 ### Validated
 
 - ✓ ACP transport layer: JSON-RPC over stdio to `cursor agent acp` — Phase 1
+- ✓ ACP lifecycle management (initialize → authenticate → session/new) with lazy init and session reuse — Phase 2 (AUTH-01)
+- ✓ Permission handling: respond to `session/request_permission` with configurable policy — Phase 2 (AUTH-02, AUTH-03)
+- ✓ API key authentication via `CURSOR_API_KEY` env var passed as `--api-key` CLI arg — Phase 2 (AUTH-01)
 
 ### Active
 
 - [ ] Cursor appears as a provider in GSD-2's provider registry (`@gsd/pi-ai`)
 - [ ] Provider implements `ApiProvider` interface (`stream()` and `streamSimple()`)
-- [ ] ACP lifecycle: `initialize` -> `authenticate` -> `session/new` -> `session/prompt`
+- [ ] ACP lifecycle: `session/prompt` streaming (Phase 3+)
 - [ ] Dynamic model discovery: query Cursor CLI for available models at startup
 - [ ] Discovered models registered with proper metadata (context window, capabilities, cost)
 - [ ] Tool handling follows GSD-2's existing pattern (same as Anthropic/Google providers)
 - [ ] Streaming responses mapped to `AssistantMessageEventStream` events (text, thinking, toolcall)
-- [ ] Permission handling: respond to `session/request_permission` from Cursor
-- [ ] Session lifecycle matches existing GSD-2 provider patterns
-- [ ] API key / authentication via `CURSOR_API_KEY` env var or Cursor CLI login
 - [ ] Error handling for CLI not installed, auth failures, session errors
 - [ ] Test suite proving ACP integration works end-to-end
 - [ ] Documentation for setup, configuration, and usage
@@ -118,4 +118,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-28 after Phase 1 complete*
+*Last updated: 2026-03-28 after Phase 2 complete*
