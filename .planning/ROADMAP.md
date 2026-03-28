@@ -88,11 +88,11 @@ Plans:
   3. Session creation and prompt errors are mapped to GSD-2 error events with meaningful messages
   4. Unit tests cover EventTranslator, AcpTransport message handling, and AcpSessionPool lifecycle logic
   5. End-to-end tests prove the full ACP integration works with a real Cursor CLI
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 05-01: Error handling across all components
-- [ ] 05-02: Test suite and documentation
+- [ ] 05-01-PLAN.md — Typed error classes (CursorCliNotFoundError, CursorAuthError, CursorSessionError) + call-site wiring + unit tests
+- [ ] 05-02-PLAN.md — Mock ACP subprocess fixture, integration test suite (4 paths), README, TESTING.md, TSDoc
 
 ## Progress
 
@@ -105,4 +105,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 2. Session & Authentication | 2/2 | Complete   | 2026-03-28 |
 | 3. Provider & Streaming | 2/2 | Complete   | 2026-03-28 |
 | 4. Model Discovery & Registration | 1/1 | Complete   | 2026-03-28 |
-| 5. Hardening & Verification | 0/2 | Not started | - |
+| 5. Hardening & Verification | 0/2 | Planning complete | - |
