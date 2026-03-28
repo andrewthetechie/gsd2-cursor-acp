@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Phase 4 context gathered
-last_updated: "2026-03-28T15:15:41.163Z"
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-28T15:51:16.771Z"
 last_activity: 2026-03-28
 progress:
   total_phases: 5
-  completed_phases: 3
-  total_plans: 6
-  completed_plans: 6
+  completed_phases: 4
+  total_plans: 7
+  completed_plans: 7
   percent: 0
 ---
 
@@ -21,12 +21,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-27)
 
 **Core value:** GSD-2 subagents can seamlessly use Cursor as their coding backend -- same interface as Anthropic or Google providers, but powered by Cursor's agent with full ACP protocol support.
-**Current focus:** Phase 03 — provider-streaming
+**Current focus:** Phase 04 — model-discovery-registration
 
 ## Current Position
 
-Phase: 4
-Plan: Not started
+Phase: 04 (model-discovery-registration) — EXECUTING
+Plan: 1 of 1
 Status: Phase complete — ready for verification
 Last activity: 2026-03-28
 
@@ -58,6 +58,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02 P02 | 4min | 3 tasks | 3 files |
 | Phase 03 P01 | 3min | 2 tasks | 4 files |
 | Phase 03 P02 | 3min | 2 tasks | 7 files |
+| Phase 04 P01 | 5min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -77,6 +78,8 @@ Recent decisions affecting current work:
 - [Phase 03]: sessionMode defaults to 'agent' in AcpSessionPool per D-15; session/new requests now include mode field
 - [Phase 03]: Inline AssistantMessageEventStream and GSD-2 types in provider.ts; @gsd/pi-ai peer dep not installed (same as Plan 01)
 - [Phase 03]: Created local src/api-registry.ts mirroring @gsd/pi-ai registry interface to enable register.ts and tests without peer dep
+- [Phase 04]: Used vi.hoisted() with Symbol.for('nodejs.util.promisify.custom') to correctly mock promisify(execFile) in Vitest
+- [Phase 04]: Exported parseModelIds and discoverModelIds for direct unit testing in register.ts
 
 ### Pending Todos
 
@@ -88,6 +91,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T15:15:41.154Z
-Stopped at: Phase 4 context gathered
-Resume file: .planning/phases/04-model-discovery-registration/04-CONTEXT.md
+Last session: 2026-03-28T15:51:16.768Z
+Stopped at: Completed 04-01-PLAN.md
+Resume file: None

@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 1: ACP Transport** - JSON-RPC over stdio to cursor agent acp with message correlation
 - [x] **Phase 2: Session & Authentication** - ACP lifecycle management and permission handling (completed 2026-03-28)
 - [x] **Phase 3: Provider & Streaming** - CursorAcpProvider implementing ApiProvider with event translation (completed 2026-03-28)
-- [ ] **Phase 4: Model Discovery & Registration** - Dynamic model discovery and GSD-2 model registration
+- [x] **Phase 4: Model Discovery & Registration** - Dynamic model discovery and GSD-2 model registration (completed 2026-03-28)
 - [ ] **Phase 5: Hardening & Verification** - Error handling, unit tests, integration tests, documentation
 
 ## Phase Details
@@ -73,10 +73,10 @@ Plans:
   1. Provider queries Cursor CLI for available models at startup and registers them dynamically
   2. Each discovered model has metadata including context window, capabilities, and cost information
   3. GSD-2 canonical model IDs and ThinkingLevel settings map correctly to Cursor model variants
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 
 Plans:
-- [ ] 04-01-PLAN.md — Async registerCursorAcpProvider with cursor-agent --list-models discovery, model-metadata static table, getCursorAcpModels export, and unit tests
+- [x] 04-01-PLAN.md — Async registerCursorAcpProvider with cursor-agent --list-models discovery, model-metadata static table, getCursorAcpModels export, and unit tests
 
 ### Phase 5: Hardening & Verification
 **Goal**: The provider handles all failure modes gracefully and is proven correct via tests and documentation
@@ -104,5 +104,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | 1. ACP Transport | 0/2 | Planning complete | - |
 | 2. Session & Authentication | 2/2 | Complete   | 2026-03-28 |
 | 3. Provider & Streaming | 2/2 | Complete   | 2026-03-28 |
-| 4. Model Discovery & Registration | 0/1 | Planning complete | - |
+| 4. Model Discovery & Registration | 1/1 | Complete   | 2026-03-28 |
 | 5. Hardening & Verification | 0/2 | Not started | - |

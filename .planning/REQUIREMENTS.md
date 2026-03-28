@@ -28,9 +28,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Models
 
-- [ ] **MODL-01**: Provider discovers available models dynamically from Cursor CLI at startup
-- [ ] **MODL-02**: Discovered models registered with metadata (context window, capabilities, cost)
-- [ ] **MODL-03**: Provider maps GSD-2 canonical model IDs and ThinkingLevel to Cursor model variants
+- [x] **MODL-01**: Provider discovers available models dynamically from Cursor CLI at startup
+- [x] **MODL-02**: Discovered models registered with metadata (context window, capabilities, cost)
+- [x] **MODL-03**: Provider maps GSD-2 canonical model IDs and ThinkingLevel to Cursor model variants
 
 ### Auth
 
@@ -95,9 +95,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | STRM-02 | Phase 3 | Complete |
 | STRM-03 | Phase 3 | Complete |
 | STRM-04 | Phase 3 | Complete |
-| MODL-01 | Phase 4 | Pending |
-| MODL-02 | Phase 4 | Pending |
-| MODL-03 | Phase 4 | Pending |
+| MODL-01 | Phase 4 | Complete |
+| MODL-02 | Phase 4 | Complete |
+| MODL-03 | Phase 4 | Complete |
 | AUTH-01 | Phase 2 | Complete |
 | AUTH-02 | Phase 2 | Complete |
 | AUTH-03 | Phase 2 | Complete |
