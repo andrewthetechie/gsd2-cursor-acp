@@ -13,7 +13,7 @@ This roadmap delivers a Cursor ACP provider for GSD-2's pi-ai package. The build
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: ACP Transport** - JSON-RPC over stdio to cursor agent acp with message correlation
-- [ ] **Phase 2: Session & Authentication** - ACP lifecycle management and permission handling
+- [x] **Phase 2: Session & Authentication** - ACP lifecycle management and permission handling (completed 2026-03-28)
 - [ ] **Phase 3: Provider & Streaming** - CursorAcpProvider implementing ApiProvider with event translation
 - [ ] **Phase 4: Model Discovery & Registration** - Dynamic model discovery and GSD-2 model registration
 - [ ] **Phase 5: Hardening & Verification** - Error handling, unit tests, integration tests, documentation
@@ -43,11 +43,11 @@ Plans:
   2. AcpSessionPool creates new sessions via session/new and reuses them for subsequent prompts
   3. Provider auto-responds to session/request_permission requests with configurable policy (default: allow-once)
   4. Permission policy is configurable between auto-approve-all, approve-reads-reject-writes, and interactive modes
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 02-01-PLAN.md — PermissionHandler with configurable policy modes and tests
-- [ ] 02-02-PLAN.md — AcpSessionPool with lazy init, session reuse, and permission wiring
+- [x] 02-02-PLAN.md — AcpSessionPool with lazy init, session reuse, and permission wiring
 
 ### Phase 3: Provider & Streaming
 **Goal**: GSD-2 consumers can call stream() on the Cursor ACP provider and receive a properly-typed AssistantMessageEventStream
@@ -102,7 +102,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. ACP Transport | 0/2 | Planning complete | - |
-| 2. Session & Authentication | 1/2 | In Progress|  |
+| 2. Session & Authentication | 2/2 | Complete   | 2026-03-28 |
 | 3. Provider & Streaming | 0/2 | Not started | - |
 | 4. Model Discovery & Registration | 0/1 | Not started | - |
 | 5. Hardening & Verification | 0/2 | Not started | - |

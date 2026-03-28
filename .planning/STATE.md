@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: "Completed 02-01-PLAN.md: PermissionHandler implementation"
-last_updated: "2026-03-28T05:08:41.395Z"
+status: verifying
+stopped_at: "Completed 02-02-PLAN.md: AcpSessionPool implementation"
+last_updated: "2026-03-28T05:14:02.419Z"
 last_activity: 2026-03-28
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 4
-  completed_plans: 3
+  completed_plans: 4
   percent: 0
 ---
 
@@ -27,7 +27,7 @@ See: .planning/PROJECT.md (updated 2026-03-27)
 
 Phase: 02 (session-authentication) — EXECUTING
 Plan: 2 of 2
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-03-28
 
 Progress: [░░░░░░░░░░] 0%
@@ -55,6 +55,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 01 P01 | 9min | 2 tasks | 7 files |
 | Phase 01 P02 | 9min | 1 tasks | 3 files |
 | Phase 02 P01 | 10min | 2 tasks | 2 files |
+| Phase 02 P02 | 4min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,8 @@ Recent decisions affecting current work:
 - [Phase 01]: Renamed JsonRpcError interface to JsonRpcErrorObject to avoid export collision with JsonRpcError class
 - [Phase 01]: Used object type for writeMessage parameter to avoid Record incompatibility with typed interfaces
 - [Phase 02]: PermissionHandler uses Set-based ToolKind lookup for approve-reads-reject-writes policy dispatch; switch_mode/other fall back to first option
+- [Phase 02]: Added per-cwd session creation deduplication via sessionCreating Map to prevent concurrent session/new calls for same cwd
+- [Phase 02]: initPromise mutex pattern for transport initialization; separate sessionCreating mutex per-cwd for session creation
 
 ### Pending Todos
 
@@ -79,6 +82,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-28T05:08:41.393Z
-Stopped at: Completed 02-01-PLAN.md: PermissionHandler implementation
+Last session: 2026-03-28T05:14:02.417Z
+Stopped at: Completed 02-02-PLAN.md: AcpSessionPool implementation
 Resume file: None
